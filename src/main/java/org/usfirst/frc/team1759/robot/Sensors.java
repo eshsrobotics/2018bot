@@ -1,6 +1,9 @@
 package org.usfirst.frc.team1759.robot;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
+import edu.wpi.first.wpilibj.interfaces.Accelerometer;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 /**
  *
@@ -15,6 +18,8 @@ import edu.wpi.first.wpilibj.BuiltInAccelerometer;
  **/
 
 public class Sensors {
+	
+	public static Gyro gyro = new ADXRS450_Gyro();
 
-	public static BuiltInAccelerometer accel = new BuiltInAccelerometer();
+	public static Accelerometer accel = new BuiltInAccelerometer();
 }
