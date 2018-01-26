@@ -1,5 +1,7 @@
 package org.usfirst.frc.team1759.robot.subsystems;
 
+//for the compression control https://wpilib.screenstepslive.com/s/4485/m/13809/l/599707-operating-a-compressor-for-pneumatics
+
 import org.usfirst.frc.team1759.robot.OI;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
