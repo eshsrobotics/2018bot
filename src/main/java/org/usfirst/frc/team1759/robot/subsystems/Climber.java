@@ -1,5 +1,7 @@
 package org.usfirst.frc.team1759.robot.subsystems;
 
+//@Author Spencer Moore
+
 import org.usfirst.frc.team1759.robot.OI;
 import org.usfirst.frc.team1759.robot.RobotMap;
 
