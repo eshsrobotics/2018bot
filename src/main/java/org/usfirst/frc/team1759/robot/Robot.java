@@ -7,9 +7,8 @@
 
 package org.usfirst.frc.team1759.robot;
 
-import org.usfirst.frc.team1759.robot.subsystems.*;
-
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
@@ -18,22 +17,14 @@ import edu.wpi.first.wpilibj.command.Scheduler;
  * it contains the code necessary to operate a robot with tank drive.
  */
 public class Robot extends IterativeRobot {
-	private TankDrive tank;
-	private Launcher launcher;
-	private Intake intake;
-	private Climber climber;
-	private OI oi;
+	private Encoder encoder;
 	
 	@Override
 	public void robotInit() {
 		//Streams usb camera video feed straight to Dashboard.
 		CameraServer.getInstance().startAutomaticCapture();
-		//Initialize drive.
-		oi = new OI();
-		tank = new TankDrive();
-		intake = new Intake();
-		launcher = new Launcher();
-		climber = new Climber();
+
+		encoder = new Encoder(0, 1);
 	}
 	
 	public void disabledInit() {
@@ -59,9 +50,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		tank.tankDrive(oi);
-		launcher.launch(oi);
-		intake.intake(oi);
-		climber.climb(oi);
+		
+		System.out.printf("%d,%f,%f,%d\n", encoder.get(), encoder.getDistance(), encoder.getRate(), encoder.getRaw());
 	}
 }
