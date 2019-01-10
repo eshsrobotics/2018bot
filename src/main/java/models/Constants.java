@@ -20,6 +20,7 @@ public class Constants {
 
         public static final Point ORIGIN = new Point(0, 0);
 		public static final long AUTONOMOUS_TIME_DRIVE_FORWARD_MILLISECONDS = 6000;
+		public static final long ACCELERATION_TIME_FRAME = 500;
 
         /***
          * Lengths and distances less than this are considered to be 0 as far as

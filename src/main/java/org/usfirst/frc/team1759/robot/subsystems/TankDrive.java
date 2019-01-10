@@ -6,6 +6,7 @@ import org.usfirst.frc.team1759.robot.OI;
 import org.usfirst.frc.team1759.robot.RobotMap;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+//import edu.wpi.first.wpilibj.
 
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -20,8 +21,7 @@ import models.Constants;
  * @author Aidan Galbreath
  */
 
-public class TankDrive extends Subsystem implements TankDriveInterface {
-
+public class TankDrive<T> extends Subsystem implements TankDriveInterface {
 	DifferentialDrive myRobot;
 	WPI_TalonSRX leftFront;
 	WPI_TalonSRX leftBack;
@@ -31,6 +31,9 @@ public class TankDrive extends Subsystem implements TankDriveInterface {
 	WPI_TalonSRX rightMid;
 	SpeedControllerGroup left;
 	SpeedControllerGroup right;
+	long timeMovementPressed = -1;
+	boolean wasMovementLastFrame = false;
+	
 
 	public TankDrive() {
 
@@ -55,22 +58,30 @@ public class TankDrive extends Subsystem implements TankDriveInterface {
 	}
 
 	public void tankDrive(OI oi) {
+		
+		
 
 		double left = 0;
 		double right = 0;
 
 		if (oi.forward.get()) {
 			left = 1;
-			right = 1;
+			right = 0.98;
 		} else if (oi.back.get()) {
 			left = -1;
-			right = -1;
-		} else if (oi.left.get()) {
-			left = -0.7;
-			right = 0.7;
+			right = -0.98;
+		}
+		if (oi.left.get()) {
+			left *= 0.5;
 		} else if (oi.right.get()) {
-			left = 0.7;
-			right = -0.7;
+			right *= 0.5;
+		}
+		if (oi.tankLeft.get()) {
+			left = -1;
+			right = 0.98;
+		} else if (oi.tankRight.get()) {
+			left = 1;
+			right = -0.98;
 		}
 		if (oi.sneak.get()) {
 			if (oi.left.get() || oi.right.get()) {
@@ -82,13 +93,23 @@ public class TankDrive extends Subsystem implements TankDriveInterface {
 			}
 		} else if (oi.precision.get()) {
 			if (oi.left.get() || oi.right.get()) {
-				left *= 0.7;
-				right *= 0.7;
+				left *= 0.8;
+				right *= 0.8;
 			} else {
-				left *= 0.4;
-				right *= 0.4;
+				left *= 0.6;
+				right *= 0.6;
 			}
 		}
+		
+		if ((oi.forward.get() || oi.back.get()) && !wasMovementLastFrame) {
+			timeMovementPressed = System.currentTimeMillis();
+		}
+		
+		long timeSincePressed = System.currentTimeMillis() - timeMovementPressed; 
+		double accelerationCurveMultiplier = Math.sqrt(timeSincePressed / 1000d);
+		//commented out to remove the acceleration curve for the treadbot
+		//left *= accelerationCurveMultiplier;
+		//right *= accelerationCurveMultiplier;
 		
 		if (Math.abs(left) < Constants.EPSILON &&
 		    Math.abs(right) < Constants.EPSILON &&
@@ -99,6 +120,9 @@ public class TankDrive extends Subsystem implements TankDriveInterface {
 		} else {
 				myRobot.tankDrive(left, right);
 		}
+		wasMovementLastFrame = oi.forward.get() || oi.back.get();
+		
+		
 	}
 	@Override
 	public void tankDrive (double leftSpeed, double rightSpeed) {
