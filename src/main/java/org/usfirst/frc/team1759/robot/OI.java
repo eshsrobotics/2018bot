@@ -82,6 +82,8 @@ public class OI {
 		precision = new NetworkButton(inputTable, "Ctrl");
 		tankLeft = new NetworkButton(inputTable, "Z");
 		tankRight = new NetworkButton(inputTable, "C");
+		launchIn = new NetworkButton(inputTable, "N");
+		launchOut = new NetworkButton(inputTable, "M");
 	
 	
 		if (joysticksAttached) {

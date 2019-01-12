@@ -14,23 +14,23 @@ public class RobotMap {
 	
 	// Drive controller ports
 	public static int LEFT_FRONT_PORT = 6;
-	public static int LEFT_BACK_PORT = 0;
-	public static int RIGHT_FRONT_PORT = 7;
-	public static int RIGHT_BACK_PORT = 2;
+	public static int LEFT_BACK_PORT = 7;
+	public static int RIGHT_FRONT_PORT = 5;
+	public static int RIGHT_BACK_PORT = 4;
 	
 	// For intake solenoid
-	public static int ARM_PORT_OUT = 3;
-	public static int ARM_PORT_IN = 2;
+	//public static int ARM_PORT_OUT = 3;
+	//public static int ARM_PORT_IN = 2;
 	
 	// Upper intake motors
-	public static int UPPER_LEFT_INTAKE= 1;
+	/*public static int UPPER_LEFT_INTAKE= 1;
 	public static int UPPER_RIGHT_INTAKE = 3;
 	public static int SECONDARY_UPPER_RIGHT_INTAKE = 0;		//Spark, not Talon 
 	public static int SECONDARY_UPPER_LEFT_INTAKE = 1;		//Spark, not Talon
 	
 	// Lower intake motors
 	public static int LOWER_LEFT_INTAKE = 4;
-	public static int LOWER_RIGHT_INTAKE = 5;
+	public static int LOWER_RIGHT_INTAKE = 5; */
 	
 	
 
